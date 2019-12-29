@@ -1,31 +1,41 @@
+
+
+
 class Node:
-    def __init__(self, value, next=None):
+    def __init__(self, value, next = None):
         self.value = value
         self.next = next
-
     def print_list(self):
-        temp = self
-        while temp is not None:
-            print(temp.value, end=" ")
-            temp = temp.next
+        curr = self
+        # temp = ""
+        while curr != None:
+            if curr.next != None:
+                print(curr.value , end="->")
+            else:
+                print(curr.value)
+            curr = curr.next
         print()
 
-    def reverse_sub_list(self, start, end):
-        current = self
-        next, previous1, previous2, previous3 = start, None, None, None
-        while current != None:
-            if current.value != start:
-                previous1 = current
-                current = current.next
-            else:
-                while current.value != end:
-                    next = current.next
-                    current.next = previous2
-                    previous2 = current
-                    current = next
-                previous1.next = current
-        return current
-    
+    def reverse_sub_list(self, p, q):
+        i = 0
+        curr = self
+        prev = None
+        while i < p-1 and curr.next != None:
+            prev = curr
+            curr = curr.next
+            i += 1
+        last_node = prev
+        last_node_of_sublist = curr
+        i = 0
+        while i < q-p+1 and curr != None:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+            i += 1
+        last_node.next = prev
+        last_node_of_sublist.next = curr
+        return self
 
 def main():
     head = Node(1)

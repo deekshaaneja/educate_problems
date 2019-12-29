@@ -1,15 +1,15 @@
 def max_sub_array_of_size_k(k, arr):
-    max_sum = 0
-    window_sum = 0
     window_start = 0
+    max_sum = 0
+    curr_sum = 0
     for window_end in range(len(arr)):
-        if window_end-window_start < k:
-            window_sum += arr[window_end]
+        if window_end < k:
+            curr_sum += arr[window_end]
         else:
-            window_sum = window_sum - arr[window_start] + arr[window_end]
-            max_sum = max(max_sum, window_sum)
+            curr_sum -= arr[window_start]
+            curr_sum += arr[window_end]
             window_start += 1
-        
+        max_sum = max(max_sum, curr_sum)
     return max_sum
 
 def main():

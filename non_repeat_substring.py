@@ -1,20 +1,20 @@
 def non_repeat_substring(s):
-    ls = list(s)
-    temp = []
-    dict_temp = {}
-    for i in range(len(s)):
-        temp.append(ls[i])
-        if len(temp) == len(set(temp)):
-            dict_temp["".join(temp)] = len(set(temp))
-        while len(temp) != len(set(temp)):
-            temp.pop(0)
-            if len(temp) == len(set(temp)):
-                dict_temp["".join(temp)] = len(set(temp))
-    maxVal = 1
-    for elem in dict_temp:
-        if dict_temp[elem] > maxVal:
-            maxVal = dict_temp[elem]
-            max_substring = elem
-    return max_substring, maxVal
+    window_start = 0
+    max_chars = {}
+    max_substring = 0
+    for window_end in range(len(s)):
+        if s[window_end] not in max_chars:
+            max_chars[s[window_end]] = 1
+        else:
+            max_chars = {s[window_end-1]:1}
+            window_start += 1
+        max_substring = max(max_substring, len(max_chars))
+    return max_substring
 
-print(non_repeat_substring("aabccbzxvb"))
+def main():
+    print("Length of the longest substring: " + str(non_repeat_substring("aabccbb")))
+    print("Length of the longest substring: " + str(non_repeat_substring("abbbb")))
+    print("Length of the longest substring: " + str(non_repeat_substring("abccde")))
+
+
+main()
