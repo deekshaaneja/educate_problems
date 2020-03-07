@@ -1,25 +1,29 @@
 class Node:
-    def __init__(self, head, next=None):
-        self.head = head
+    def __init__(self, value, next=None):
+        self.value = value
         self.next = next
 
     def print_list(self):
         curr = self
+        s = ""
         while curr != None:
-            print(str(curr.head) + " ")
+            if curr.next == None:
+                s = str(curr.value) + "->"
+            else:
+                s = str(curr.value)
             curr = curr.next
-    def has_cycle(self):
-        slow = self
-        fast = slow.next.next
-        while fast != None and fast.next != None:
-            slow = slow.next
-            if fast != None:
-                fast = fast.next.next
-            if slow == fast:
-                return True
-        return False
+        print(s)
 
-    
+def has_cycle(head):
+    fast, slow = head, head
+    while fast is not None and fast.next is not None:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False
+
+
 def main():
     head = Node(1)
     head.next = Node(2)
@@ -27,13 +31,13 @@ def main():
     head.next.next.next = Node(4)
     head.next.next.next.next = Node(5)
     head.next.next.next.next.next = Node(6)
-    print("LinkedList has cycle: " + str(head.has_cycle()))
+    print("LinkedList has cycle: " + str(has_cycle(head)))
 
     head.next.next.next.next.next.next = head.next.next
-    print("LinkedList has cycle: " + str(head.has_cycle()))
+    print("LinkedList has cycle: " + str(has_cycle(head)))
 
     head.next.next.next.next.next.next = head.next.next.next
-    print("LinkedList has cycle: " + str(head.has_cycle()))
+    print("LinkedList has cycle: " + str(has_cycle(head)))
     # head.print_list()
 
 
