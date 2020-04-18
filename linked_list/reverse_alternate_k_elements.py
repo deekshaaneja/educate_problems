@@ -6,48 +6,39 @@ class Node:
     def print_list(self):
         current = self
         s = ""
-        while current != None:
-            if current.next != None:
+        while current is not None:
+            if current.next is not None:
                 s += str(current.value) + "->"
             else:
                 s += str(current.value)
             current = current.next
         print(s)
 
-def reverse_alternate_k_elements(head, k):
+def reverse_every_k_elements(head, k):
     current, previous = head, None
-    alternate_flag = True
-    last_node_of_previous_list = previous
-    last_node_of_sublist = current
     i = 0
-
     while True:
-        if i < k:
+        last_node_of_previous_part = previous
+        last_node_of_sub_list = current
+        
+        next = current.next
+        i = 0
+        while current is not None and i <k:
             next = current.next
-            if alternate_flag == True:
-                current.next = previous
+            current.next = previous
             previous = current
             current = next
-
-        if i == k or current is None:
-            alternate_flag = False if alternate_flag == True else True
-            i = -1
-            if alternate_flag == False:
-                last_node_of_sublist.next = current
-                if last_node_of_previous_list is None:
-                    head = previous
-                else:
-                    last_node_of_previous_list.next = previous
-            else:
-                last_node_of_sublist = current
-                last_node_of_previous_list = previous
-
-        i += 1
+            i += 1
+        if last_node_of_previous_part is not None:
+            last_node_of_previous_part.next = previous
+        else:
+            head = previous
+        last_node_of_sub_list.next = current
         if current is None:
             break
-        
+        previous = last_node_of_sub_list
     return head
-        
+
 def main():
     head = Node(1)
     head.next = Node(2)
@@ -57,15 +48,12 @@ def main():
     head.next.next.next.next.next = Node(6)
     head.next.next.next.next.next.next = Node(7)
     head.next.next.next.next.next.next.next = Node(8)
-    head.next.next.next.next.next.next.next.next = Node(9)
 
     print("Nodes of original LinkedList are: ", end='')
     head.print_list()
-    result = reverse_alternate_k_elements(head, 3)
+    result = reverse_every_k_elements(head, 3)
     print("Nodes of reversed LinkedList are: ", end='')
     result.print_list()
 
 
 main()
-        
-        

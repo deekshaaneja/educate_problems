@@ -1,27 +1,24 @@
 from collections import deque
 
 def find_permutations(nums):
-    numsLength = len(nums)
     result = []
+    nums_length = len(nums)
     permutations = deque()
     permutations.append([])
-    for currentNumber in nums:
+    for i in range(nums_length):
         n = len(permutations)
-        for i in range(n):
-            oldPermutation = permutations.popleft()
-            for j in range(len(oldPermutation) + 1):
-                newPermutation = list(oldPermutation)
-                newPermutation.insert(j, currentNumber)
-                if len(newPermutation) == numsLength:
-                    result.append(newPermutation)
-                else:
-                    permutations.append(newPermutation)
+        for j in range(n):
+            old_permutations = permutations.popleft()
+            for j in range(len(old_permutations) + 1):
+                new_permutation = list(old_permutations)
+                new_permutation.insert(j, nums[i])
+                permutations.append(new_permutation)
+                if len(new_permutation) == nums_length:
+                    result.append(new_permutation)
     return result
 
 
-
 def main():
-    print("Here are all the permutations: " + str(find_permutations([1, 3])))
-
+    print("Here are all the permutations: " + str(find_permutations([1, 3, 5])))
 
 main()

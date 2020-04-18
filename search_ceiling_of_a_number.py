@@ -1,25 +1,21 @@
 def search_ceiling_of_a_number(arr, key):
-    if len(arr) == 1:
-        if key < arr[0]:
-            return arr[0]
-        else:
-            return None
-    if len(arr) % 2 == 0:
-        midpoint = int(len(arr)/2)
-    else:
-        midpoint = int((len(arr) + 1) / 2) - 1
-    if key == arr[midpoint]:
-        return arr[midpoint]
-    elif key > arr[midpoint]:
-        ls = arr[midpoint:]
-        return search_ceiling_of_a_number(ls, key)
-    elif key < arr[midpoint]:
-        if key > arr[midpoint-1]:
-            ls = arr[midpoint:]
-            return search_ceiling_of_a_number(ls, key)
-        else:
-            ls = arr[:midpoint]
-            return search_ceiling_of_a_number(ls, key)
+    start = 0
+    end = len(arr) - 1
+    last_num = arr[start]
+    if key < arr[0]:
+        return 0
+    while start <= end:
+        mid = start + (end - start) // 2
+        if arr[mid] == key:
+            return mid
+        elif arr[mid] < key:
+            start = mid + 1
+        elif arr[mid] > key:
+            if last_num < key:
+                return mid
+            end = mid - 1
+        last_num = arr[mid]
+    return -1
 
 def main():
     print(search_ceiling_of_a_number([4, 6, 10], 6))

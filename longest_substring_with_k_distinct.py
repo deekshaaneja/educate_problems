@@ -1,20 +1,36 @@
 def longest_substring_with_k_distinct(s, k):
-    
-    window_start = 0
-    distinct_chars = {}
-    maxLen = 0
-    for window_end in range(len(s)):
-        if s[window_end] in distinct_chars:
-            distinct_chars[s[window_end]] += 1
+    frequency_map = {}
+    max_length = 0
+    start, end = 0, 1
+    while end <= len(s) - 1:
+        word = s[start: end]
+        if s[end - 1] in frequency_map:
+            frequency_map[s[end - 1]] += 1
         else:
-            distinct_chars[s[window_end]] = 1
-        if len(distinct_chars) > k:
-            distinct_chars[s[window_start]] -= 1
-            if distinct_chars[s[window_start]] == 0:
-                distinct_chars.pop(s[window_start], None)
-            window_start += 1
-        maxLen = max(maxLen, len(s[window_start: window_end+1]))
-    return maxLen
+            frequency_map[s[end - 1]] = 1
+        if len(frequency_map) <= k:
+            count = get_value_sum(frequency_map)
+            if count > max_length:
+                max_length = count
+        elif len(frequency_map) > k:
+            frequency_map[s[start]] -= 1
+            if frequency_map[s[start]] == 0:
+                frequency_map.pop(s[start])
+            start += 1
+        end = end + 1
+            
+    return max_length
+
+def get_value_sum(d):
+    count = 0
+    for character in d:
+        count += d[character]
+    return count
+
+        
+
+
+
             
 
 def main():

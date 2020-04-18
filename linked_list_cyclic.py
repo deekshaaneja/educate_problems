@@ -16,9 +16,9 @@ class Node:
 
 def has_cycle(head):
     fast, slow = head, head
-    while fast is not None and fast.next is not None:
-        slow = slow.next
+    while fast.next is not None and fast.next.next is not None:
         fast = fast.next.next
+        slow = slow.next
         if slow == fast:
             return True
     return False

@@ -1,22 +1,32 @@
 def binary_search(arr, key):
     start = 0
     end = len(arr) -1
-    isAscending = arr[start] < arr[end]
-    while start <= end:
-        mid = start + (end-start) // 2
-        if key == arr[mid]:
-            return mid
-        if isAscending:
-            if key < arr[mid]:
+    if arr[start] > arr[end]:
+        is_ascending = False
+    else:
+        is_ascending = True
+    if is_ascending == True:
+        while end >= start:
+            mid = start + (end - start) // 2
+            if arr[mid] == key:
+                return True
+            elif arr[mid] > key:
                 end = mid - 1
-            else:
+            elif arr[mid] < key:
                 start = mid + 1
-        else:
-            if key > arr[mid]:
+            # start += 1
+            # end -= 1
+    else:
+        while end >= start:
+            mid = start + (end - start) // 2
+            if arr[mid] == key:
+                return True
+            elif arr[mid] < key:
                 end = mid - 1
-            else:
+            elif arr[mid] > key:
                 start = mid + 1
-    return -1
+    return False
+
 
 def main():
     print(binary_search([4, 6, 10], 10))

@@ -1,14 +1,17 @@
 def find_missing_numbers(nums):
     i = 0
-    while i < len(nums):
-        j = nums[i] - 1
-        if nums[i] != nums[j]:
+    result = []
+    while True:
+        if i == len(nums):
+            break
+        if nums[i] != i + 1:
+            j = nums[i] - 1
             nums[i], nums[j] = nums[j], nums[i]
-        else:
-            i += 1
-    out = []
-    for i in range(len(nums)):
-        if i != nums[i] -1:
-            out.append(i)
-    return out
+        i += 1
+    for k in range(1, len(nums)):
+        if k != nums[k-1]:
+            result.append(k)
+    return result
+
+
 print(find_missing_numbers([2, 3, 1, 8, 2, 3, 5, 1]))
