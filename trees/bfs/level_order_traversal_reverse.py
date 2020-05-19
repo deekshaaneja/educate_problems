@@ -1,19 +1,19 @@
-from collections import deque
+from queue import deque
 
-class TreeNode:
+class  TreeNode:
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
 
-def reverse_traversal(root):
+def traverse(root):
     q = deque()
     q.append(root)
     result = deque()
     while q:
-        levelSize = len(q)
+        length = len(q)
         currentLevel = []
-        for _ in range(levelSize):
+        for _ in range(length):
             currentNode = q.popleft()
             currentLevel.append(currentNode.value)
             if currentNode.left:
@@ -30,7 +30,7 @@ def main():
     root.left.left = TreeNode(9)
     root.right.left = TreeNode(10)
     root.right.right = TreeNode(5)
-    print("Reverse level order traversal: " + str(reverse_traversal(root)))
+    print("Reverse level order traversal: " + str(traverse(root)))
 
 
 main()

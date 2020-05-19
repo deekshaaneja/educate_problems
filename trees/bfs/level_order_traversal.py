@@ -6,14 +6,14 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def traverse(root):
+def level_order_traversal(root):
     q = deque()
     q.append(root)
     result = []
     while q:
-        levelSize = len(q)
+        length = len(q)
         currentLevel = []
-        for _ in range(levelSize):
+        for _ in range(length):
             currentNode = q.popleft()
             currentLevel.append(currentNode.value)
             if currentNode.left:
@@ -30,7 +30,7 @@ def main():
     root.left.left = TreeNode(9)
     root.right.left = TreeNode(10)
     root.right.right = TreeNode(5)
-    print("Level order traversal: " + str(traverse(root)))
+    print("Level order traversal: " + str(level_order_traversal(root)))
 
 
 main()
