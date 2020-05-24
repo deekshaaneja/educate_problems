@@ -4,12 +4,19 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def has_path(currentNode, sum):
+def has_path(root, k):
+    allPaths = []
+    return find_paths(root, k, [], allPaths)
+
+def find_paths(currentNode, currentSum, currentPath, allPaths):
+    allPaths.append(currentNode.value)
     if currentNode is None:
-        return False
-    if currentNode.value == sum and currentNode.left is None and currentNode.right is None:
-        return True
-    return has_path(currentNode.left, sum - currentNode.value) or has_path(currentNode.right, sum - currentNode.value)
+        return numPaths
+    if currentNode.value == currentSum:
+        numPaths += 1
+    find_paths(currentNode.left, currentSum-currentNode.value, numPaths)
+    find_paths(currentNode.right, currentSum-currentNode.value, numPaths)
+
 
 
 def main():
@@ -20,7 +27,7 @@ def main():
     root.left.left = TreeNode(9)
     root.right.left = TreeNode(10)
     root.right.right = TreeNode(5)
-    # print("Tree has path: " + str(has_path(root, 23)))
+    print("Tree has path: " + str(has_path(root, 23)))
     print("Tree has path: " + str(has_path(root, 16)))
 
 

@@ -10,7 +10,8 @@
             "request": "launch",
             "subProcess": true,
             "program": "${file}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "justMyCode": false
         }
     ]
 }
