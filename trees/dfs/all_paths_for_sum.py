@@ -4,23 +4,23 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def find_paths(root, sum):
+def getAllPaths(root, sum):
     allPaths = []
-    find_path_sum(root, [], allPaths, sum) 
+    findPath(root, [], allPaths, sum)
     return allPaths
 
-    
 
-def find_path_sum(currentNode, currentPath, allPaths, sum):
+def findPath(currentNode, currentPath, allPaths, currentSum):
     if currentNode is None:
-        return 
+        return
     currentPath.append(currentNode.value)
-    if currentNode.value == sum and currentNode.left is None and currentNode.right is None:
+    if currentNode.value == currentSum and currentNode.left is None and currentNode.right is None:
         allPaths.append(list(currentPath))
-    else:
-        find_path_sum(currentNode.left, currentPath, allPaths, sum - currentNode.value)
-        find_path_sum(currentNode.right, currentPath, allPaths, sum - currentNode.value)
+    findPath(currentNode.left, currentPath, allPaths, currentSum-currentNode.value)
+    findPath(currentNode.right, currentPath, allPaths, currentSum-currentNode.value)
     del currentPath[-1]
+
+
 def main():
 
     root = TreeNode(12)
@@ -31,7 +31,7 @@ def main():
     root.right.right = TreeNode(5)
     sum = 23
     print("Tree paths with sum " + str(sum) +
-            ": " + str(find_paths(root, sum)))
+            ": " + str(getAllPaths(root, sum)))
 
 
 main()
