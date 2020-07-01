@@ -1,32 +1,33 @@
 from collections import deque
 
 class TreeNode:
-    def __init__(self, value):
+    def __init__(self, value, left=None, right= None):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 def zigzag_traversal(root):
-    q = deque()
-    q.append(root)
+    queue = deque()
+    queue.append(root)
+    isRev = False
     result = []
-    i = True
-    while q:
-        levelSize = len(q)
-        levelArr = deque()
-        for _ in range(levelSize):
-            currentNode = q.popleft()
-            if i == True:
-                levelArr.append(currentNode.value)
+    while queue:
+        lenCurrLevel = len(queue)
+        currLevel = deque()
+        for i in range(lenCurrLevel):
+            currNode = queue.popleft()
+            if isRev == True:
+                currLevel.appendleft(currNode.value)
             else:
-                levelArr.appendleft(currentNode.value)
-            if currentNode.left:
-                q.append(currentNode.left)
-            if currentNode.right:
-                q.append(currentNode.right)
-        i = not i
-        result.append(list(levelArr))
+                currLevel.append(currNode.value)
+            if currNode.left:
+                queue.append(currNode.left)
+            if currNode.right:
+                queue.append(currNode.right)
+        isRev = not isRev
+        result.append(list(currLevel))
     return result
+
 
 def main():
     root = TreeNode(12)

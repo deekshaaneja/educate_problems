@@ -1,27 +1,29 @@
 from collections import deque
 
 class TreeNode:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+    def __init__(self, value, left=None, right=None):
+        self.value =value
+        self.left = left
+        self.right = right
 
 def level_order_traversal(root):
     q = deque()
     q.append(root)
     result = []
     while q:
-        length = len(q)
-        currentLevel = []
-        for _ in range(length):
+        len_curr_level = len(q)
+        curr_ls = []
+        for i in range(len_curr_level):
             currentNode = q.popleft()
-            currentLevel.append(currentNode.value)
+            curr_ls.append(currentNode.value)
             if currentNode.left:
                 q.append(currentNode.left)
             if currentNode.right:
                 q.append(currentNode.right)
-        result.append(currentLevel)
+        print(curr_ls)
+        result.append(curr_ls)
     return result
+
 
 def main():
     root = TreeNode(12)

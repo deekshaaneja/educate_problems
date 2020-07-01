@@ -1,30 +1,32 @@
 from heapq import *
 
-class MedianOfaStream:
-    def __init__(self, min_heap = [], max_heap = []):
-        self.max_heap = []
-        self.min_heap = []
+
+class medianOfAStreamClass:
+
+    def __init__(self):
+        self.maxHeap = []  # containing first half of numbers
+        self.minHeap = []  # containing second half of numbers
 
     def insert_num(self, num):
-        if not self.max_heap or -1 * self.max_heap[0] >= num:
-            heappush(self.max_heap, -1 * num)
+        if len(maxHeap) > 0 and num >= maxHeap[0]:
+            heappush(self.minHeap, -num)
         else:
-            heappush(self.min_heap, num)
-
-        if len(self.max_heap) > len(self.min_heap) + 1:
-            heappush(self.min_heap, -1 * heappop(self.max_heap)) 
-        elif len(self.max_heap) < len(self.min_heap):
-            heappush(self.max_heap, -1 * heappop(self.min_heap)) 
+            heappush(self.maxHeap, num)
+        
+        if len(self.maxHeap) > len(self.minHeap) + 1:
+            heappush(self.minHeap, -heappop(self.maxHeap))
+        elif len(self.maxHeap) < len(self.minHeap):
+            heappush(self.maxHeap, -heappop(self.minHeap))
 
     def find_median(self):
-        if len(self.min_heap) == len(self.max_heap):
-            median = self.min_heap[0] / 2 - self.max_heap[0] /2
-        else:
-            median = -1 * self.max_heap[0] 
-        return median
+        if len(self.maxHeap) == len(self.minHeap):
+            return -self.maxHeap[0] / 2.0 + self.minHeap[0] / 2.0
+        return -self.maxHeap[0] / 1.0
+    
+
 
 def main():
-    medianOfAStream = MedianOfaStream()
+    medianOfAStream = medianOfAStreamClass()
     medianOfAStream.insert_num(3)
     medianOfAStream.insert_num(1)
     print("The median is: " + str(medianOfAStream.find_median()))

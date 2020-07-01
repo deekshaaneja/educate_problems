@@ -1,0 +1,11 @@
+depName,empNo,name,salary,hobby
+sales,1,Alice,5000,"[game,ski]"
+personnel,2,Olivia,3900,"[game,ski]"
+sales,3,Ella,4800,"[skate,ski]"
+sales,4,Ebba,4800,"[game,ski]"
+personnel,5,Lilly,3500,"[climb,ski]"
+develop,7,Astrid,4200,"[game,ski]"
+develop,8,Saga,6000,"[kajak,ski]"
+develop,9,Freja,4500,"[game,kajak]"
+develop,10,Wilma,5200,"[game,ski]"
+develop,11,Maja,5200,"[game,farming]"

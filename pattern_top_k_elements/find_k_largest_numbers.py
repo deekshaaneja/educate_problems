@@ -2,15 +2,14 @@ from heapq import *
 
 def find_k_largest_numbers(nums, k):
     min_heap = []
-    for elem in nums:
+    for i in range(len(nums)):
         if len(min_heap) < k:
-            heappush(min_heap, elem)
+            heappush(min_heap, nums[i])
         else:
-            heappushpop(min_heap, elem)
+            heappushpop(min_heap, nums[i])
     return min_heap
 
 def main():
-
     print("Here are the top K numbers: " +
         str(find_k_largest_numbers([3, 1, 5, 12, 2, 11], 3)))
 

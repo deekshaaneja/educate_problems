@@ -1,23 +1,19 @@
 class TreeNode:
-    def __init__(self, value):
+    def __init__(self, value, left=None, right=None):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
-def has_path(root, k):
-    allPaths = []
-    return find_paths(root, k, [], allPaths)
+def has_path(root, sum):
+    return hasPathRec(root, sum)
 
-def find_paths(currentNode, currentSum, currentPath, allPaths):
-    allPaths.append(currentNode.value)
+def hasPathRec(currentNode, currentSum):
     if currentNode is None:
-        return numPaths
-    if currentNode.value == currentSum:
-        numPaths += 1
-    find_paths(currentNode.left, currentSum-currentNode.value, numPaths)
-    find_paths(currentNode.right, currentSum-currentNode.value, numPaths)
-
-
+        return False
+    currentSum -= currentNode.value
+    if currentNode.left is None and currentNode.right is None and currentNode.value == currentSum:
+        return True
+    return hasPathRec(currentNode.left, currentSum) or hasPathRec(currentNode.right, currentSum)
 
 def main():
 

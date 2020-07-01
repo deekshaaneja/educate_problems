@@ -1,22 +1,21 @@
 class Node:
-    def __init__(self, value, next = None):
+    def __init__(self, value, next=None):
         self.value = value
         self.next = next
 
     def print_list(self):
         current = self
-        s = ""
+        s =""
         while current is not None:
             if current.next is not None:
                 s += str(current.value) + "->"
             else:
                 s += str(current.value)
             current = current.next
-        print(s)
-    
+        return s
 
-def reverse_list(head):
-    current = head
+def reverse_list(node):
+    current = node
     previous = None
     while current is not None:
         next = current.next
@@ -33,9 +32,9 @@ def main():
     head.next.next.next.next = Node(10)
 
     print("Nodes of original LinkedList are: ", end='')
-    head.print_list()
+    print(head.print_list())
     result = reverse_list(head)
     print("Nodes of reversed LinkedList are: ", end='')
-    result.print_list()
+    print(result.print_list())
 
 main()

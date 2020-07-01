@@ -6,7 +6,7 @@ def find_Kth_smallest_number(nums, k):
         heappush(max_heap, -nums[i])
     for i in range(k, len(nums)):
         heappushpop(max_heap, -nums[i])
-    return [-1*elem for elem in max_heap] 
+    return -max_heap[0]
 
 def main():
 
@@ -19,5 +19,6 @@ def main():
 
     print("Kth smallest number is: " +
             str(find_Kth_smallest_number([5, 12, 11, -1, 12], 3)))
+
 
 main()

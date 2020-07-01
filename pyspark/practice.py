@@ -4,7 +4,7 @@ from pyspark.sql.types import *
 import os
 from pyspark.sql.window import Window
 
-conf = SparkConf().set("spark.driver.host", "127.0.0.1").set("spar.sql.shuffle.partitions", "8")
+conf = SparkConf().set("spark.driver.host", "127.0.0.1").set("spark.sql.shuffle.partitions", "8")
 sc = SparkContext(conf=conf, master = "local[*]", appName="Practice")
 sqlcontext = SQLContext(sc)
 
@@ -90,6 +90,6 @@ if __name__ == "__main__":
     # find_rank()
     # find_avg()
     # find_top_n()
-    # time_lag()
+    time_lag()
     # running_total()
-    word_count()
+    # word_count()

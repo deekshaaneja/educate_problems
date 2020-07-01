@@ -6,9 +6,7 @@ def find_missing_number(nums):
             nums[i], nums[j] = nums[j], nums[i]
         else:
             i += 1
-    for i in range(n):
-        if nums[i] != i:
+    for i in range(len(nums)):
+        if i!= nums[i]:
             return i
-    return n
-
 print(find_missing_number([8, 3, 5, 2, 4, 6, 0, 1]))

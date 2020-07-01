@@ -1,18 +1,18 @@
 def non_repeat_substring(s):
     window_start = 0
-    index_map = {}
-    max_len_non_repeating = 0
+    max_length = 0
+    char_index_map = {}
+
     for window_end in range(len(s)):
-        if s[window_end] in index_map:
-            index_dup = index_map[s[window_end]][-1]
-            if window_start <= index_dup:
-                window_start += index_dup + 1
-            index_map[s[window_end]].append(window_end)
+        if s[window_end] not in char_index_map:
+            char_index_map[s[window_end]] = window_end
+            max_length = max(max_length, window_end - window_start + 1)
         else:
-            index_map[s[window_end]] = [window_end]
-        current_length = window_end - window_start + 1
-        max_len_non_repeating = max(current_length, max_len_non_repeating)
-    return max_len_non_repeating
+            char_index_map[s[window_end]] = window_end
+            window_start = window_end
+            max_length = max(max_length, window_end - window_start + 1)
+    return max_length
+
 
 
 def main():

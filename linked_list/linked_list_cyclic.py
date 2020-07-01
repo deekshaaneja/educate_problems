@@ -4,24 +4,25 @@ class Node:
         self.next = next
 
     def print_list(self):
-        curr = self
         s = ""
-        while curr != None:
-            if curr.next == None:
-                s = str(curr.value) + "->"
+        current = self
+        while current != None:
+            if current.next is not None:
+                s += str(current.value) + "->" 
+                current = current.next
             else:
-                s = str(curr.value)
-            curr = curr.next
-        print(s)
+                s += str(current.value)
+        return s
 
-def has_cycle(head):
-    fast, slow = head, head
+def has_cycle(root):
+    fast, slow = root, root
     while fast.next is not None and fast.next.next is not None:
-        fast = fast.next.next
         slow = slow.next
+        fast = fast.next.next
         if slow == fast:
             return True
     return False
+
 
 
 def main():
