@@ -1,26 +1,26 @@
 import math
 
 class TreeNode:
-    def __init__(self, value, left=None, right=None):
+    def __init__(self, value):
+        self.left = None
+        self.right = None
         self.value = value
-        self.left = left
-        self.right = right
 
 def checkBST(root):
-    max_num = math.inf
-    min_num = - math.inf
-    return checkBSTRec(root, max_num, min_num)
+    maxValue = math.inf
+    minValue = - math.inf
+    return isBSTRec(root, minValue, maxValue)
 
-def checkBSTRec(root, max_num, min_num):
-    if root == None:
+def isBSTRec(currentNode, minValue, maxValue):
+    if currentNode.value > maxValue or currentNode.value < minValue:
+        return False
+    if currentNode.left is None and currentNode.right is None and currentNode.value < maxValue and currentNode.value > minValue:
         return True
-    if root.value > max_num or root.value < min_num:
-        return False
-    if root.right is not None and root.left is None:
-        return False
-    if root.left is not None and root.right is None:
-        return False 
-    return checkBSTRec(root.left, root.value, min_num) and checkBSTRec(root.right, max_num, root.value)
+    if currentNode.left is not None:
+        return isBSTRec(currentNode.left, minValue, currentNode.value)
+    if currentNode.right is not None:
+        return isBSTRec(currentNode.right, currentNode.value, maxValue)
+
 
 def main():
     root = TreeNode(6)

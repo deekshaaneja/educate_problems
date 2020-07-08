@@ -6,12 +6,12 @@ def search_rotated_array(arr, key):
         mid = left + (right-left) // 2
         if arr[mid] == key:
             return mid
-        if arr[left] < arr[mid]:
+        if arr[left] <= arr[mid]:
             if key > arr[left] and key <= arr[mid]:
                 right = mid - 1
             else:
                 left = mid + 1
-        else:
+        elif arr[mid] <= arr[right]:
             if key > arr[mid] and key <= arr[right]:
                 left = mid + 1
             else:
@@ -22,5 +22,6 @@ def search_rotated_array(arr, key):
 def main():
     print(search_rotated_array([10, 15, 1, 3, 8], 15))
     print(search_rotated_array([4, 5, 7, 9, 10, -1, 2], 10))
+    print(search_rotated_array([4, 5, 7, 9, 10, 11,-1, 2, 3], 11))
 
 main()

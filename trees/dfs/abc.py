@@ -17,6 +17,11 @@ def find_max_diff(ls, k):
     print(curr_max)
     return curr_max + max_heap[0]
 
+def find_max_diff_1(arr, k):
+    arr.sort()
+    max_diff = arr[len(arr)-1] - arr[0]
+    
+
 
 ls = [10, 10, 10]
 print(find_max_diff(ls, 2))
